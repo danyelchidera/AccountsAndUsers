@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 
 namespace Utility.Dtos
 {
-    public class AccountReadDto
+    public class UserWriteDto: UserManipulationDto
     {
-#nullable disable
-        public Guid Id { get; set; }
-        public string CompanyName { get; set; }
-#nullable enable
-        public string? Website { get; set; }
     }
 }

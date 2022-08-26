@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Utility.Dtos;
 
 namespace Presentation.Controllers
 {
@@ -18,9 +14,40 @@ namespace Presentation.Controllers
             _service = service;
 
         [HttpGet]
-        public async Task<IActionResult> GetCompanies()
+        public async Task<IActionResult> GetAccounts()
         {
             return Ok(await _service.AccountService.GetAllAccounts(false));
+        }
+
+        [HttpGet("{id}", Name="GetAccount")]
+        public async Task<IActionResult> GetAccount(Guid id)
+        {
+            return Ok(await _service.AccountService.GetAccountAsync(id, false));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAccount([FromBody] AccountWriteDto accountWriteDto)
+        {
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+            var accountReadDto = await _service.AccountService.CreateAccountAsync(accountWriteDto);
+            return CreatedAtRoute(nameof(GetAccount), new {id = accountReadDto.Id}, accountReadDto);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAccount(Guid id, [FromBody] AccountUpdateDto accountUpdateDto)
+        {
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+            await _service.AccountService.UpdateAccount(id, accountUpdateDto, true);
+            return NoContent();
+        }
+
+        [HttpDelete("id")]
+        public async Task<IActionResult> DeleteAccount(Guid id)
+        {
+           await _service.AccountService.DeleteAccountAsync(id, false);
+            return NoContent();
         }
 
     }

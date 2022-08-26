@@ -16,6 +16,23 @@ namespace Repository
         {
         }
 
+        public Task CreateAccount(Account account)
+        {
+            Create(account);
+            return Task.CompletedTask;
+        }
+
+        public Task DeleteAccountAsync(Account account)
+        {
+            Delete(account);
+            return Task.CompletedTask;
+        }
+
+        public async Task<Account?> GetAccountAsync(Guid id, bool trackChanges)=>
+            await FindByCondition(c => c.Id.Equals(id), trackChanges)
+            .Include(x => x.Users)
+            .FirstOrDefaultAsync();
+
         public async Task<IEnumerable<Account>> GetAllAccounts(bool trackChanges) =>
            await FindAll(trackChanges)
             .OrderBy(x => x.CompanyName)

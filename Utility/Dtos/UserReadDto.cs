@@ -10,15 +10,11 @@ namespace Utility.Dtos
     public class UserReadDto
     {
 #nullable disable
-        [Required(ErrorMessage = "First name is required")]
-        [MaxLength(128, ErrorMessage = "First name cannot be more than 128 character")]
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
-
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; }
+        public Guid AccountId { get; set; }
 #nullable enable
-        [MaxLength(128, ErrorMessage = "First name cannot be more than 128 character")]
         public string? LastName { get; set; }
     }
 }
