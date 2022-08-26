@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Exceptions
 {
-    public class AccountNotFoundException: NotFoundException
+    public class UserNotFoundException: NotFoundException
     {
-        public AccountNotFoundException(Guid id)
-            :base ($"Account with id: {id} not found.")
-
+        public UserNotFoundException(Guid id)
+            :base($"User with id: {id} not found.")
         {
 
         }

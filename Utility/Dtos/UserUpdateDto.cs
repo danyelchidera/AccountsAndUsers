@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Utility.Dtos
 {
-    public class UserUpdateDto
+    public class UserUpdateDto: UserManipulationDto
     {
     }
 }

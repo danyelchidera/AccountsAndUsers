@@ -14,6 +14,7 @@ namespace AccountsAndUsers
             CreateMap<Account, AccountWriteDto>().ReverseMap();
             CreateMap<Account, SingleAccountReadDto>().ReverseMap();
             CreateMap<Account, AccountUpdateDto>().ReverseMap();
+            CreateMap<User, UserUpdateDto>().ReverseMap();  
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Utility.Dtos;
+ 
 
 namespace Presentation.Controllers
 {
@@ -43,7 +44,7 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(Guid id)
         {
            await _service.AccountService.DeleteAccountAsync(id, false);
